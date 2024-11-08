@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mbti_type: one
+  compatible_mbti_type: one
+  score: 1
+
+two:
+  mbti_type: two
+  compatible_mbti_type: two
+  score: 1

@@ -1,0 +1,9 @@
+<h1>ユーザー詳細</h1>
+
+<p><strong>名前:</strong> <%= @user.name %></p>
+<p><strong>メールアドレス:</strong> <%= @user.email %></p>
+<p><strong>MBTIタイプ:</strong> <%= @user.mbti_type.type_name if @user.mbti_type.present? %></p>
+
+<% if user_signed_in? && current_user == @user %>
+  <%= link_to 'プロフィールを編集', edit_user_registration_path %>
+<% end %>

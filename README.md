@@ -25,6 +25,17 @@
 
 - has_many :users 
 
+## mbti_compatibilities テーブル
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| mbti_type               | references | null: false, foreign_key: { to_table: :mbti_types } |
+| compatible_mbti_type    | references | null: false, foreign_key: { to_table: :mbti_types } |
+| score               | integer | null: false |
+
+- belongs_to :mbti_type
+- belongs_to :compatible_mbti_type, class_name: 'MbtiType'
+
 ## rooms テーブル
 
 | Column             | Type   | Options     |
