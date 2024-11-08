@@ -1,0 +1,6 @@
+<h1>相性ランキング</h1>
+<ul>
+  <% @compatible_users.each do |entry| %>
+    <li><%= entry[:user].name %> - 相性スコア: <%= entry[:score] %></li>
+  <% end %>
+</ul>
