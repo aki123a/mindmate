@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_12_012552) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_12_072755) do
   create_table "mbti_compatibilities", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "mbti_type_id", null: false
     t.bigint "compatible_mbti_type_id", null: false
@@ -26,6 +26,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_12_012552) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", charset: "utf8mb3", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "room_users", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_users_on_room_id"
+    t.index ["user_id"], name: "index_room_users_on_user_id"
   end
 
   create_table "rooms", charset: "utf8mb3", force: :cascade do |t|
@@ -51,5 +70,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_12_012552) do
 
   add_foreign_key "mbti_compatibilities", "mbti_types"
   add_foreign_key "mbti_compatibilities", "mbti_types", column: "compatible_mbti_type_id"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "room_users", "rooms"
+  add_foreign_key "room_users", "users"
   add_foreign_key "users", "mbti_types"
 end

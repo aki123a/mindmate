@@ -8,6 +8,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :mbti_type_id, presence: true
 
+  has_many :room_users, dependent: :destroy
+  has_many :rooms, through: :room_users
+  has_many :messages, dependent: :destroy
+
   def compatibility_with(other_user)
     compatibility = MbtiCompatibility.find_by(mbti_type: self.mbti_type, compatible_mbti_type: other_user.mbti_type)
     compatibility ? compatibility.score : 0
